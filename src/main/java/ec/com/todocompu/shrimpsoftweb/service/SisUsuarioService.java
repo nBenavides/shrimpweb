@@ -1,4 +1,4 @@
-package ec.com.todocompu.shrimpcore.service;
+package ec.com.todocompu.shrimpsoftweb.service;
 
 public interface SisUsuarioService {
 

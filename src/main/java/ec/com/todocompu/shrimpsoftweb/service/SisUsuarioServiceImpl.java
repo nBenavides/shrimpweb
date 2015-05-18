@@ -1,10 +1,10 @@
-package ec.com.todocompu.shrimpcore.service;
+package ec.com.todocompu.shrimpsoftweb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ec.com.todocompu.shrimpcore.dao.SisUsuarioDao;
-import ec.com.todocompu.shrimpcore.entity.SisUsuario;
+import ec.com.todocompu.shrimpsoftweb.dao.SisUsuarioDao;
+import ec.com.todocompu.shrimpsoftweb.entity.SisUsuario;
 
 @Service
 public class SisUsuarioServiceImpl implements SisUsuarioService {

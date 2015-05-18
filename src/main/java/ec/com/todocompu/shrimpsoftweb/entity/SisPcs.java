@@ -1,4 +1,4 @@
-package ec.com.todocompu.shrimpcore.entity;
+package ec.com.todocompu.shrimpsoftweb.entity;
 
 import java.io.Serializable;
 import java.util.Date;
