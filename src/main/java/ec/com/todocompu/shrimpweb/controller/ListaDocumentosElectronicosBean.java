@@ -2,14 +2,19 @@ package ec.com.todocompu.shrimpweb.controller;
 
 import java.io.Serializable;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import ec.com.todocompu.shrimpweb.service.DocumentoElectronicoService;
 
 @Controller
 @Scope("session")
 public class ListaDocumentosElectronicosBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@Autowired
+	private DocumentoElectronicoService documentoElectronicoService;
 	private String cedulaRuc;
 	private String mes;
 	private String anio;
@@ -45,5 +50,8 @@ public class ListaDocumentosElectronicosBean implements Serializable {
 		System.out.println(cedulaRuc);
 		System.out.println(mes);
 		System.out.println(anio);
+		documentoElectronicoService.obtenerDocumentosPorCedulaRucMesAnio(
+				cedulaRuc, mes, anio);
+
 	}
 }
