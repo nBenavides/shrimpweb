@@ -1,4 +1,4 @@
-package ec.com.todocompu.shrimpsoftweb.config;
+package ec.com.todocompu.shrimpweb.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

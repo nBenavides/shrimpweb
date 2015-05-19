@@ -2,11 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ec.com.todocompu</groupId>
-	<artifactId>shrimpSoftWeb</artifactId>
+	<artifactId>shrimpweb</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
-	<name>shrimpSoftWeb</name>
-	<description>Portal de consulta de documentos electrónicos</description>
 
 	<organization>
 		<name>Todocompu</name>
@@ -89,7 +87,7 @@
 
 		<dependency>
 			<groupId>ec.com.todocompu</groupId>
-			<artifactId>shrimpUtils</artifactId>
+			<artifactId>utilidades</artifactId>
 			<version>0.0.1</version>
 		</dependency>
 

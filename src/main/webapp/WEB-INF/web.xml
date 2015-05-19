@@ -35,7 +35,7 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>ec.com.todocompu.shrimpsoftweb</param-value>
+		<param-value>ec.com.todocompu.shrimpweb</param-value>
 	</context-param>
 
 	<!-- PAGINA DE BIENVENIDA -->

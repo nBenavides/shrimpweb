@@ -1,4 +1,4 @@
-package ec.com.todocompu.shrimpsoftweb.config;
+package ec.com.todocompu.shrimpweb.config;
 
 import java.util.Properties;
 
@@ -19,18 +19,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan("ec.com.redepronik")
+@ComponentScan("ec.com.todocompu")
 @PropertySource("classpath:database.properties")
 public class PersistenceConfig {
 
 	@Autowired
 	private Environment env;
-
-	@Value("${jdbc.driverClassName}")
-	String driverClassName;
-
-	@Value("${jdbc.language}")
-	String language;
 
 	@Value("${jdbc.server}")
 	String server;
@@ -50,9 +44,9 @@ public class PersistenceConfig {
 	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(driverClassName);
-		dataSource.setUrl("jdbc:" + language + "://" + server + ":" + port
-				+ "/" + database);
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUrl("jdbc:postgresql://" + server + ":" + port + "/"
+				+ database);
 		dataSource.setUsername(username);
 		dataSource.setPassword(password);
 
@@ -71,7 +65,6 @@ public class PersistenceConfig {
 				setProperty("hibernate.dialect",
 						"org.hibernate.dialect.PostgreSQLDialect");
 				setProperty("hibernate.show_sql", "true");
-				setProperty("hibernate.default_schema", "negosys");
 			}
 		};
 	}
@@ -80,7 +73,7 @@ public class PersistenceConfig {
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
-		sessionFactory.setPackagesToScan(new String[] { "ec.com.redepronik" });
+		sessionFactory.setPackagesToScan(new String[] { "ec.com.todocompu" });
 		sessionFactory.setHibernateProperties(hibernateProperties());
 
 		return sessionFactory;

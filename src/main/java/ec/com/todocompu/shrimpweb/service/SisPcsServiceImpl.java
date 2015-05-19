@@ -1,10 +1,10 @@
-package ec.com.todocompu.shrimpsoftweb.service;
+package ec.com.todocompu.shrimpweb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ec.com.todocompu.shrimpsoftweb.dao.SisPcsDao;
-import ec.com.todocompu.shrimpsoftweb.entity.SisPcs;
+import ec.com.todocompu.shrimpweb.dao.SisPcsDao;
+import ec.com.todocompu.shrimpweb.entity.SisPcs;
 
 @Service
 public class SisPcsServiceImpl implements SisPcsService {

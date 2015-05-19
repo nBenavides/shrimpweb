@@ -1,6 +1,6 @@
-package ec.com.todocompu.shrimpsoftweb.service;
+package ec.com.todocompu.shrimpweb.service;
 
-import ec.com.todocompu.shrimpsoftweb.entity.SisPcs;
+import ec.com.todocompu.shrimpweb.entity.SisPcs;
 
 public interface SisPcsService {
 
