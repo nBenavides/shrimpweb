@@ -47,9 +47,6 @@ public class ListaDocumentosElectronicosBean implements Serializable {
 	}
 
 	public void buscarDocumentosElectronicos() {
-		System.out.println(cedulaRuc);
-		System.out.println(mes);
-		System.out.println(anio);
 		documentoElectronicoService.obtenerDocumentosPorCedulaRucMesAnio(
 				cedulaRuc, mes, anio);
 

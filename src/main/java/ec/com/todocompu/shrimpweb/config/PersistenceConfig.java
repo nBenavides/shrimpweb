@@ -6,7 +6,6 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,25 +25,20 @@ public class PersistenceConfig {
 	@Autowired
 	private Environment env;
 
-	@Value("${jdbc.server}")
-	String server;
-
-	@Value("${jdbc.port}")
-	String port;
-
-	@Value("${jdbc.database}")
-	String database;
-
-	@Value("${jdbc.username}")
-	String username;
-
-	@Value("${jdbc.password}")
-	String password;
-
 	@Bean
 	public DataSource dataSource() {
+		String server = env.getProperty("jdbc.server");
+		String port = env.getProperty("jdbc.port");
+		String database = env.getProperty("jdbc.database");
+		String username = env.getProperty("jdbc.username");
+		String password = env.getProperty("jdbc.password");
+
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
+		System.out.println("jdbc:postgresql://" + server + ":" + port + "/"
+				+ database);
+		System.out.println(username);
+		System.out.println(password);
 		dataSource.setUrl("jdbc:postgresql://" + server + ":" + port + "/"
 				+ database);
 		dataSource.setUsername(username);
