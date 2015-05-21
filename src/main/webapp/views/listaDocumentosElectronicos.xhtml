@@ -11,62 +11,83 @@
 
 	<ui:define name="content">
 
-		<p:growl id="growl" life="2000" />
+		<p:growl id="mensajes" life="2000" />
 
 		<h:form>
-			<p:outputLabel for="txtCedulaRuc" value="Cédula / Ruc:" />
-			<p:inputText id="txtCedulaRuc"
-				value="#{listaDocumentosElectronicosBean.cedulaRuc}" />
 
-			<p:outputLabel for="cmbMes" value="Mes:" />
-			<p:selectOneMenu id="cmbMes"
-				value="#{listaDocumentosElectronicosBean.mes}">
-				<f:selectItem itemLabel="Enero" itemValue="01" />
-				<f:selectItem itemLabel="Febrero" itemValue="02" />
-				<f:selectItem itemLabel="Marzo" itemValue="03" />
-				<f:selectItem itemLabel="Abril" itemValue="04" />
-				<f:selectItem itemLabel="Mayo" itemValue="05" />
-				<f:selectItem itemLabel="Junio" itemValue="06" />
-				<f:selectItem itemLabel="Julio" itemValue="07" />
-				<f:selectItem itemLabel="Agosto" itemValue="08" />
-				<f:selectItem itemLabel="Septiembre" itemValue="09" />
-				<f:selectItem itemLabel="Octubre" itemValue="10" />
-				<f:selectItem itemLabel="Noviembre" itemValue="11" />
-				<f:selectItem itemLabel="Diciembre" itemValue="12" />
-			</p:selectOneMenu>
+			<br />
+			<p:outputLabel value="Portal de Comprobantes Electrónicos" />
+			<br />
 
-			<p:outputLabel for="cmbAnio" value="Año:" />
-			<p:selectOneMenu id="cmbAnio"
-				value="#{listaDocumentosElectronicosBean.anio}">
-				<f:selectItem itemLabel="2015" itemValue="2015" />
-				<f:selectItem itemLabel="2016" itemValue="2016" />
-			</p:selectOneMenu>
+			<p:panelGrid columns="3">
 
-			<p:commandButton value="BUSCAR" id="btnBuscar" update="growl"
-				actionListener="#{listaDocumentosElectronicosBean.buscarDocumentosElectronicos}"
-				styleClass="ui-priority-primary" />
+				<p:outputLabel for="txtCedulaRuc" value="Cédula / Ruc:" />
+				<p:inputText id="txtCedulaRuc"
+					value="#{listaDocumentosElectronicosBean.cedulaRuc}" />
+				<p:outputLabel id="txtClienteProveedor"
+					value="#{listaDocumentosElectronicosBean.clienteProveedor}" />
+
+				<p:outputLabel for="cmbMes" value="Mes:" />
+				<p:selectOneMenu id="cmbMes"
+					value="#{listaDocumentosElectronicosBean.mes}">
+					<f:selectItem itemLabel="Enero" itemValue="01" />
+					<f:selectItem itemLabel="Febrero" itemValue="02" />
+					<f:selectItem itemLabel="Marzo" itemValue="03" />
+					<f:selectItem itemLabel="Abril" itemValue="04" />
+					<f:selectItem itemLabel="Mayo" itemValue="05" />
+					<f:selectItem itemLabel="Junio" itemValue="06" />
+					<f:selectItem itemLabel="Julio" itemValue="07" />
+					<f:selectItem itemLabel="Agosto" itemValue="08" />
+					<f:selectItem itemLabel="Septiembre" itemValue="09" />
+					<f:selectItem itemLabel="Octubre" itemValue="10" />
+					<f:selectItem itemLabel="Noviembre" itemValue="11" />
+					<f:selectItem itemLabel="Diciembre" itemValue="12" />
+				</p:selectOneMenu>
+
+				<p:commandButton value="BUSCAR" id="btnBuscar"
+					update="tblDocumentosElectronicos, mensajes"
+					actionListener="#{listaDocumentosElectronicosBean.obtener}"
+					styleClass="ui-priority-primary" />
+
+				<p:outputLabel for="cmbAnio" value="Año:" />
+				<p:selectOneMenu id="cmbAnio"
+					value="#{listaDocumentosElectronicosBean.anio}">
+					<f:selectItem itemLabel="2015" itemValue="2015" />
+					<f:selectItem itemLabel="2016" itemValue="2016" />
+				</p:selectOneMenu>
+
+				<p:commandButton value="ENVIAR CORREO" id="btnEnviarCorreo"
+					update="mensajes"
+					actionListener="#{listaDocumentosElectronicosBean.obtener}"
+					styleClass="ui-priority-primary" />
+
+			</p:panelGrid>
+
 		</h:form>
 
-		<p:commandButton value="ENVIAR CORREO" id="btnBuscar" update="growl"
-			actionListener="#{buttonView.buttonAction}"
-			styleClass="ui-priority-primary" />
+		<br />
+		<br />
 
-		<p:dataTable var="car" value="#{dtBasicView.cars}">
-			<p:column headerText="Id">
-				<h:outputText value="#{car.id}" />
+		<p:dataTable id="tblDocumentosElectronicos" var="ce"
+			value="#{listaDocumentosElectronicosBean.listaComprobantesElectronicos}"
+			selection="#{listaDocumentosElectronicosBean.listaComprobantesElectronicosSeleccionados}"
+			rowKey="#{ce.eClaveAcceso}">
+
+			<p:column selectionMode="multiple"
+				style="width:16px;text-align:center" />
+
+			<p:column headerText="Empresa Emisora">
+				<h:outputText value="#{ce.eEmpresa}" />
 			</p:column>
 
-			<p:column headerText="Tipo Documento">
-				<h:outputText value="#{car.year}" />
+			<p:column headerText="Clave Acceso">
+				<h:outputText value="#{ce.eClaveAcceso}" />
 			</p:column>
 
-			<p:column headerText="Brand">
-				<h:outputText value="#{car.brand}" />
+			<p:column headerText="Fecha de Autorización">
+				<h:outputText value="#{ce.eAutorizacionFecha}" />
 			</p:column>
 
-			<p:column headerText="Color">
-				<h:outputText value="#{car.color}" />
-			</p:column>
 		</p:dataTable>
 	</ui:define>
 

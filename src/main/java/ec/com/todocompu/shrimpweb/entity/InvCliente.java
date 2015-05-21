@@ -1,105 +1,110 @@
 package ec.com.todocompu.shrimpweb.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the inv_cliente database table.
  * 
  */
 @Entity
-@Table(name="inv_cliente")
-@NamedQuery(name="InvCliente.findAll", query="SELECT i FROM InvCliente i")
+@Table(name = "inv_cliente", schema = "inventario")
+@NamedQuery(name = "InvCliente.findAll", query = "SELECT i FROM InvCliente i")
 public class InvCliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private InvClientePK id;
 
-	@Column(name="cc_codigo", nullable=false, length=7)
+	@Column(name = "cc_codigo", nullable = false, length = 7)
 	private String ccCodigo;
 
-	@Column(name="cc_empresa", nullable=false, length=7)
+	@Column(name = "cc_empresa", nullable = false, length = 7)
 	private String ccEmpresa;
 
-	@Column(name="cli_celular", length=12)
+	@Column(name = "cli_celular", length = 12)
 	private String cliCelular;
 
-	@Column(name="cli_ciudad", length=30)
+	@Column(name = "cli_ciudad", length = 30)
 	private String cliCiudad;
 
-	@Column(name="cli_cupo_credito", precision=9, scale=2)
+	@Column(name = "cli_cupo_credito", precision = 9, scale = 2)
 	private BigDecimal cliCupoCredito;
 
-	@Column(name="cli_dias_credito", precision=3)
+	@Column(name = "cli_dias_credito", precision = 3)
 	private BigDecimal cliDiasCredito;
 
-	@Column(name="cli_direccion", length=100)
+	@Column(name = "cli_direccion", length = 100)
 	private String cliDireccion;
 
-	@Column(name="cli_email", length=500)
+	@Column(name = "cli_email", length = 500)
 	private String cliEmail;
 
-	@Column(name="cli_id_empresa", length=7)
+	@Column(name = "cli_id_empresa", length = 7)
 	private String cliIdEmpresa;
 
-	@Column(name="cli_id_numero", length=13)
+	@Column(name = "cli_id_numero", length = 13)
 	private String cliIdNumero;
 
-	@Column(name="cli_id_tipo", length=1)
+	@Column(name = "cli_id_tipo", length = 1)
 	private String cliIdTipo;
 
-	@Column(name="cli_inactivo")
+	@Column(name = "cli_inactivo")
 	private Boolean cliInactivo;
 
-	@Column(name="cli_nombre", nullable=false, length=100)
+	@Column(name = "cli_nombre", nullable = false, length = 100)
 	private String cliNombre;
 
-	@Column(name="cli_observaciones", length=200)
+	@Column(name = "cli_observaciones", length = 200)
 	private String cliObservaciones;
 
-	@Column(name="cli_parroquia", length=30)
+	@Column(name = "cli_parroquia", length = 30)
 	private String cliParroquia;
 
-	@Column(name="cli_precio", precision=2)
+	@Column(name = "cli_precio", precision = 2)
 	private BigDecimal cliPrecio;
 
-	@Column(name="cli_provincia", length=30)
+	@Column(name = "cli_provincia", length = 30)
 	private String cliProvincia;
 
-	@Column(name="cli_razon_social", length=100)
+	@Column(name = "cli_razon_social", length = 100)
 	private String cliRazonSocial;
 
-	@Column(name="cli_secuencia", precision=7)
+	@Column(name = "cli_secuencia", precision = 7)
 	private BigDecimal cliSecuencia;
 
-	@Column(name="cli_telefono", length=12)
+	@Column(name = "cli_telefono", length = 12)
 	private String cliTelefono;
 
-	@Column(name="cli_zona", length=30)
+	@Column(name = "cli_zona", length = 30)
 	private String cliZona;
 
-	@Column(name="usr_codigo", nullable=false, length=20)
+	@Column(name = "usr_codigo", nullable = false, length = 20)
 	private String usrCodigo;
 
-	@Column(name="usr_empresa", nullable=false, length=7)
+	@Column(name = "usr_empresa", nullable = false, length = 7)
 	private String usrEmpresa;
 
-	@Column(name="usr_fecha_inserta", nullable=false)
+	@Column(name = "usr_fecha_inserta", nullable = false)
 	private Timestamp usrFechaInserta;
 
-	@Column(name="vend_codigo", length=7)
+	@Column(name = "vend_codigo", length = 7)
 	private String vendCodigo;
 
-	@Column(name="vend_empresa", length=7)
+	@Column(name = "vend_empresa", length = 7)
 	private String vendEmpresa;
 
-	//bi-directional many-to-one association to InvVenta
-	@OneToMany(mappedBy="invCliente")
+	// bi-directional many-to-one association to InvVenta
+	@OneToMany(mappedBy = "invCliente")
 	private List<InvVenta> invVentas;
 
 	public InvCliente() {

@@ -35,10 +35,6 @@ public class PersistenceConfig {
 
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
-		System.out.println("jdbc:postgresql://" + server + ":" + port + "/"
-				+ database);
-		System.out.println(username);
-		System.out.println(password);
 		dataSource.setUrl("jdbc:postgresql://" + server + ":" + port + "/"
 				+ database);
 		dataSource.setUsername(username);

@@ -1,90 +1,95 @@
 package ec.com.todocompu.shrimpweb.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the inv_proveedor database table.
  * 
  */
 @Entity
-@Table(name="inv_proveedor")
-@NamedQuery(name="InvProveedor.findAll", query="SELECT i FROM InvProveedor i")
+@Table(name = "inv_proveedor", schema = "inventario")
+@NamedQuery(name = "InvProveedor.findAll", query = "SELECT i FROM InvProveedor i")
 public class InvProveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private InvProveedorPK id;
 
-	@Column(name="pc_codigo", nullable=false, length=7)
+	@Column(name = "pc_codigo", nullable = false, length = 7)
 	private String pcCodigo;
 
-	@Column(name="pc_empresa", nullable=false, length=7)
+	@Column(name = "pc_empresa", nullable = false, length = 7)
 	private String pcEmpresa;
 
-	@Column(name="prov_celular", length=12)
+	@Column(name = "prov_celular", length = 12)
 	private String provCelular;
 
-	@Column(name="prov_ciudad", length=30)
+	@Column(name = "prov_ciudad", length = 30)
 	private String provCiudad;
 
-	@Column(name="prov_direccion", length=100)
+	@Column(name = "prov_direccion", length = 100)
 	private String provDireccion;
 
-	@Column(name="prov_email", length=500)
+	@Column(name = "prov_email", length = 500)
 	private String provEmail;
 
-	@Column(name="prov_id_empresa", length=7)
+	@Column(name = "prov_id_empresa", length = 7)
 	private String provIdEmpresa;
 
-	@Column(name="prov_id_numero", length=13)
+	@Column(name = "prov_id_numero", length = 13)
 	private String provIdNumero;
 
-	@Column(name="prov_id_tipo", length=1)
+	@Column(name = "prov_id_tipo", length = 1)
 	private String provIdTipo;
 
-	@Column(name="prov_inactivo")
+	@Column(name = "prov_inactivo")
 	private Boolean provInactivo;
 
-	@Column(name="prov_nombre", nullable=false, length=100)
+	@Column(name = "prov_nombre", nullable = false, length = 100)
 	private String provNombre;
 
-	@Column(name="prov_observaciones", length=200)
+	@Column(name = "prov_observaciones", length = 200)
 	private String provObservaciones;
 
-	@Column(name="prov_parroquia", length=30)
+	@Column(name = "prov_parroquia", length = 30)
 	private String provParroquia;
 
-	@Column(name="prov_provincia", length=30)
+	@Column(name = "prov_provincia", length = 30)
 	private String provProvincia;
 
-	@Column(name="prov_razon_social", length=100)
+	@Column(name = "prov_razon_social", length = 100)
 	private String provRazonSocial;
 
-	@Column(name="prov_secuencia", precision=7)
+	@Column(name = "prov_secuencia", precision = 7)
 	private BigDecimal provSecuencia;
 
-	@Column(name="prov_telefono", length=12)
+	@Column(name = "prov_telefono", length = 12)
 	private String provTelefono;
 
-	@Column(name="prov_zona", length=30)
+	@Column(name = "prov_zona", length = 30)
 	private String provZona;
 
-	@Column(name="usr_codigo", nullable=false, length=7)
+	@Column(name = "usr_codigo", nullable = false, length = 7)
 	private String usrCodigo;
 
-	@Column(name="usr_empresa", nullable=false, length=7)
+	@Column(name = "usr_empresa", nullable = false, length = 7)
 	private String usrEmpresa;
 
-	@Column(name="usr_fecha_inserta")
+	@Column(name = "usr_fecha_inserta")
 	private Timestamp usrFechaInserta;
 
-	//bi-directional many-to-one association to InvCompra
-	@OneToMany(mappedBy="invProveedor")
+	// bi-directional many-to-one association to InvCompra
+	@OneToMany(mappedBy = "invProveedor")
 	private List<InvCompra> invCompras;
 
 	public InvProveedor() {

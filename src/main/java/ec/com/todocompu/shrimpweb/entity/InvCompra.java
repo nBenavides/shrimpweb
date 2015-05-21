@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
  * 
  */
 @Entity
-@Table(name = "inv_compras")
+@Table(name = "inv_compras", schema = "inventario")
 @NamedQuery(name = "InvCompra.findAll", query = "SELECT i FROM InvCompra i")
 public class InvCompra implements Serializable {
 	private static final long serialVersionUID = 1L;
