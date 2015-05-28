@@ -46,12 +46,6 @@ public class InvVenta implements Serializable {
 	@Column(name = "emp_codigo", nullable = false, length = 7)
 	private String empCodigo;
 
-	@Column(name = "sec_codigo", nullable = false, length = 7)
-	private String secCodigo;
-
-	@Column(name = "sec_empresa", nullable = false, length = 7)
-	private String secEmpresa;
-
 	@Column(name = "usr_codigo", nullable = false, length = 7)
 	private String usrCodigo;
 
@@ -203,22 +197,6 @@ public class InvVenta implements Serializable {
 
 	public void setEmpCodigo(String empCodigo) {
 		this.empCodigo = empCodigo;
-	}
-
-	public String getSecCodigo() {
-		return this.secCodigo;
-	}
-
-	public void setSecCodigo(String secCodigo) {
-		this.secCodigo = secCodigo;
-	}
-
-	public String getSecEmpresa() {
-		return this.secEmpresa;
-	}
-
-	public void setSecEmpresa(String secEmpresa) {
-		this.secEmpresa = secEmpresa;
 	}
 
 	public String getUsrCodigo() {

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 
 import ec.com.todocompu.shrimpweb.entity.ComprobanteElectronico;
 import ec.com.todocompu.shrimpweb.service.DocumentoElectronicoService;
+import ec.com.todocompu.shrimpweb.service.InvClienteService;
+import ec.com.todocompu.shrimpweb.service.InvProveedorService;
 
 @Controller
 @Scope("session")
@@ -19,6 +21,12 @@ public class ListaDocumentosElectronicosBean implements Serializable {
 	@Autowired
 	private DocumentoElectronicoService documentoElectronicoService;
 
+	@Autowired
+	private InvClienteService invClienteService;
+
+	@Autowired
+	private InvProveedorService invProveedorService;
+
 	private String cedulaRuc;
 	private String mes;
 	private String anio;
@@ -28,8 +36,7 @@ public class ListaDocumentosElectronicosBean implements Serializable {
 	private List<ComprobanteElectronico> listaComprobantesElectronicosSeleccionados;
 
 	public ListaDocumentosElectronicosBean() {
-		cedulaRuc = "1791952359001";
-		clienteProveedor = "Camaronera La Santa Concordia de la isla perdida";
+		// cedulaRuc = "0704016492001";
 	}
 
 	public String getClienteProveedor() {
@@ -83,9 +90,19 @@ public class ListaDocumentosElectronicosBean implements Serializable {
 	}
 
 	public void obtener() {
-
 		listaComprobantesElectronicos = documentoElectronicoService
 				.obtenerDocumentosPorCedulaRucMesAnio(cedulaRuc, mes, anio);
 
+		if (listaComprobantesElectronicos != null) {
+			clienteProveedor = invClienteService.obtenerPorCedulaRuc(cedulaRuc);
+			if (clienteProveedor == null)
+				clienteProveedor = invProveedorService.obtenerPorRuc(cedulaRuc);
+		}
 	}
+
+	public void enviarComprobantes() {
+		documentoElectronicoService.enviarComprobantes(cedulaRuc,
+				listaComprobantesElectronicosSeleccionados, mes, anio);
+	}
+
 }

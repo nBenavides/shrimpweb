@@ -12,4 +12,7 @@ public interface DocumentoElectronicoService {
 	public List<ComprobanteElectronico> obtenerDocumentosPorCedulaRucMesAnio(
 			String cedulaRuc, String mes, String anio);
 
+	@Transactional
+	public void enviarComprobantes(String cedulaRuc,
+			List<ComprobanteElectronico> comprobantes, String mes, String anio);
 }

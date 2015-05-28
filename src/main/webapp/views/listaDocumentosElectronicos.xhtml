@@ -1,96 +1,117 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
-
-<ui:composition template="/templates/masterLayout.xhtml">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
 
 	<ui:define name="content">
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="ShadowBox TexAlCenter whiteback BlueBorderedBox">
+					<h1 class="BigTopic">Portal de Comprobantes Electrónicos</h1>
 
-		<p:growl id="mensajes" life="2000" />
+					<h:form id="form">
 
-		<h:form>
+						<p:growl id="mensajes" life="20000" showSummary="false"
+							showDetail="true" />
 
-			<br />
-			<p:outputLabel value="Portal de Comprobantes Electrónicos" />
-			<br />
+						<p:panelGrid columns="1" layout="grid"
+							style="border:0px !important; background:none;">
 
-			<p:panelGrid columns="3">
+							<p:inputText id="txtCedulaRuc"
+								value="#{listaDocumentosElectronicosBean.cedulaRuc}"
+								placeholder="Cédula / Ruc" styleClass="Responsive TexAlCenter"
+								style="float: none;" />
 
-				<p:outputLabel for="txtCedulaRuc" value="Cédula / Ruc:" />
-				<p:inputText id="txtCedulaRuc"
-					value="#{listaDocumentosElectronicosBean.cedulaRuc}" />
-				<p:outputLabel id="txtClienteProveedor"
-					value="#{listaDocumentosElectronicosBean.clienteProveedor}" />
+							<p:inputText id="txtClienteProveedor" readonly="true"
+								value="#{listaDocumentosElectronicosBean.clienteProveedor}"
+								styleClass="Responsive TexAlCenter" style="float: none;" />
 
-				<p:outputLabel for="cmbMes" value="Mes:" />
-				<p:selectOneMenu id="cmbMes"
-					value="#{listaDocumentosElectronicosBean.mes}">
-					<f:selectItem itemLabel="Enero" itemValue="01" />
-					<f:selectItem itemLabel="Febrero" itemValue="02" />
-					<f:selectItem itemLabel="Marzo" itemValue="03" />
-					<f:selectItem itemLabel="Abril" itemValue="04" />
-					<f:selectItem itemLabel="Mayo" itemValue="05" />
-					<f:selectItem itemLabel="Junio" itemValue="06" />
-					<f:selectItem itemLabel="Julio" itemValue="07" />
-					<f:selectItem itemLabel="Agosto" itemValue="08" />
-					<f:selectItem itemLabel="Septiembre" itemValue="09" />
-					<f:selectItem itemLabel="Octubre" itemValue="10" />
-					<f:selectItem itemLabel="Noviembre" itemValue="11" />
-					<f:selectItem itemLabel="Diciembre" itemValue="12" />
-				</p:selectOneMenu>
+							<p:selectOneMenu id="cmbMes"
+								value="#{listaDocumentosElectronicosBean.mes}"
+								panelStyleClass="Container80 TexAlCenter"
+								styleClass="TexAlCenter" style="float: none;">
+								<f:selectItem itemLabel="Mes" itemValue="00" />
+								<f:selectItem itemLabel="Enero" itemValue="01" />
+								<f:selectItem itemLabel="Febrero" itemValue="02" />
+								<f:selectItem itemLabel="Marzo" itemValue="03" />
+								<f:selectItem itemLabel="Abril" itemValue="04" />
+								<f:selectItem itemLabel="Mayo" itemValue="05" />
+								<f:selectItem itemLabel="Junio" itemValue="06" />
+								<f:selectItem itemLabel="Julio" itemValue="07" />
+								<f:selectItem itemLabel="Agosto" itemValue="08" />
+								<f:selectItem itemLabel="Septiembre" itemValue="09" />
+								<f:selectItem itemLabel="Octubre" itemValue="10" />
+								<f:selectItem itemLabel="Noviembre" itemValue="11" />
+								<f:selectItem itemLabel="Diciembre" itemValue="12" />
+							</p:selectOneMenu>
 
-				<p:commandButton value="BUSCAR" id="btnBuscar"
-					update="tblDocumentosElectronicos, mensajes"
-					actionListener="#{listaDocumentosElectronicosBean.obtener}"
-					styleClass="ui-priority-primary" />
+							<p:selectOneMenu id="cmbAnio"
+								value="#{listaDocumentosElectronicosBean.anio}"
+								style="float: none;">
+								<f:selectItem itemLabel="Año" itemValue="00" />
+								<f:selectItem itemLabel="2015" itemValue="2015" />
+								<f:selectItem itemLabel="2016" itemValue="2016" />
+							</p:selectOneMenu>
 
-				<p:outputLabel for="cmbAnio" value="Año:" />
-				<p:selectOneMenu id="cmbAnio"
-					value="#{listaDocumentosElectronicosBean.anio}">
-					<f:selectItem itemLabel="2015" itemValue="2015" />
-					<f:selectItem itemLabel="2016" itemValue="2016" />
-				</p:selectOneMenu>
+							<p:commandButton value="BUSCAR" id="btnBuscar"
+								update="txtClienteProveedor, tblDocumentosElectronicos, mensajes"
+								actionListener="#{listaDocumentosElectronicosBean.obtener}"
+								styleClass="Responsive" style="float: none;" />
+						</p:panelGrid>
 
-				<p:commandButton value="ENVIAR CORREO" id="btnEnviarCorreo"
-					update="mensajes"
-					actionListener="#{listaDocumentosElectronicosBean.obtener}"
-					styleClass="ui-priority-primary" />
+						<br />
 
-			</p:panelGrid>
+						<p:dataTable id="tblDocumentosElectronicos" var="ce"
+							value="#{listaDocumentosElectronicosBean.listaComprobantesElectronicos}"
+							selection="#{listaDocumentosElectronicosBean.listaComprobantesElectronicosSeleccionados}"
+							rowKey="#{ce.claveAcceso}" reflow="true">
 
-		</h:form>
+							<f:facet name="header">
+								<p:commandButton value="ENVIAR COMPROBANTES"
+									id="btnEnviarCorreoHeader" update=":form:mensajes"
+									actionListener="#{listaDocumentosElectronicosBean.enviarComprobantes}" />
+							</f:facet>
 
-		<br />
-		<br />
+							<p:column selectionMode="multiple" />
 
-		<p:dataTable id="tblDocumentosElectronicos" var="ce"
-			value="#{listaDocumentosElectronicosBean.listaComprobantesElectronicos}"
-			selection="#{listaDocumentosElectronicosBean.listaComprobantesElectronicosSeleccionados}"
-			rowKey="#{ce.eClaveAcceso}">
+							<p:column headerText="Empresa Emisora">
+								<h:outputText value="#{ce.empresa}" />
+							</p:column>
 
-			<p:column selectionMode="multiple"
-				style="width:16px;text-align:center" />
+							<p:column headerText="Tipo de Documento">
+								<h:outputText value="#{ce.tipoDocumento}" />
+							</p:column>
 
-			<p:column headerText="Empresa Emisora">
-				<h:outputText value="#{ce.eEmpresa}" />
-			</p:column>
+							<p:column headerText="Número de Documento">
+								<h:outputText value="#{ce.numeroDocumento}" />
+							</p:column>
 
-			<p:column headerText="Clave Acceso">
-				<h:outputText value="#{ce.eClaveAcceso}" />
-			</p:column>
+							<p:column headerText="Fecha de Emisión">
+								<h:outputText value="#{ce.fechaEmision}" />
+							</p:column>
 
-			<p:column headerText="Fecha de Autorización">
-				<h:outputText value="#{ce.eAutorizacionFecha}" />
-			</p:column>
+							<p:column headerText="Fecha de Autorización">
+								<h:outputText value="#{ce.fechaAutorizacionFormateado}" />
+							</p:column>
 
-		</p:dataTable>
+							<p:column headerText="Clave Acceso">
+								<h:outputText value="#{ce.claveAcceso}" />
+							</p:column>
+
+							<f:facet name="footer">
+								<p:commandButton value="ENVIAR COMPROBANTES"
+									id="btnEnviarCorreoFooter" update=":form:mensajes"
+									actionListener="#{listaDocumentosElectronicosBean.enviarComprobantes}" />
+							</f:facet>
+						</p:dataTable>
+
+					</h:form>
+
+				</div>
+			</div>
+		</div>
+
 	</ui:define>
 
 </ui:composition>
-
-</html>

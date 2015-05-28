@@ -40,13 +40,13 @@
 
 	<!-- PAGINA DE BIENVENIDA -->
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>empty-page.jsf</welcome-file>
 	</welcome-file-list>
 
 	<!-- TEMA DE PRIMEFACES -->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>start</param-value>
+		<param-value>ronin</param-value>
 	</context-param>
 
 	<!-- TIEMPO DE SESIÓN -->

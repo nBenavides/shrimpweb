@@ -1,0 +1,19 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pr="http://primefaces.org/ronin">
+
+    <div class="Animated05" id="layout-menu-cover">
+        <ui:include src="topbar.xhtml" />
+
+        <pr:menu>
+            <p:menuitem id="rm_shrimsoft" value="ShrimpSoft Web" icon="fa fa-joomla" outcome="/empty-page"/>
+            <p:menuitem id="rm_ecomprobantes" value="E-Comprobantes" icon="fa fa-files-o" outcome="/views/listaDocumentosElectronicos"/>
+        </pr:menu>
+
+    </div>
+
+</ui:composition>
