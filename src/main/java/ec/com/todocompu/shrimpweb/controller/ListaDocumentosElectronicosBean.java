@@ -11,6 +11,8 @@ import ec.com.todocompu.shrimpweb.entity.ComprobanteElectronico;
 import ec.com.todocompu.shrimpweb.service.DocumentoElectronicoService;
 import ec.com.todocompu.shrimpweb.service.InvClienteService;
 import ec.com.todocompu.shrimpweb.service.InvProveedorService;
+import ec.com.todocompu.utilidades.enumerador.Anio;
+import ec.com.todocompu.utilidades.enumerador.Mes;
 
 @Controller
 @Scope("session")
@@ -36,7 +38,6 @@ public class ListaDocumentosElectronicosBean implements Serializable {
 	private List<ComprobanteElectronico> listaComprobantesElectronicosSeleccionados;
 
 	public ListaDocumentosElectronicosBean() {
-		// cedulaRuc = "0704016492001";
 	}
 
 	public String getClienteProveedor() {
@@ -45,6 +46,14 @@ public class ListaDocumentosElectronicosBean implements Serializable {
 
 	public void setClienteProveedor(String clienteProveedor) {
 		this.clienteProveedor = clienteProveedor;
+	}
+
+	public Mes[] getMeses() {
+		return Mes.values();
+	}
+
+	public Anio[] getAnios() {
+		return Anio.values();
 	}
 
 	public String getCedulaRuc() {

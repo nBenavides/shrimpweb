@@ -55,7 +55,7 @@ public class DocumentoElectronicoServiceImpl implements
 					"INGRESE UN NÚMERO DE CÉDULA");
 		} else if (mes.compareTo("00") == 0) {
 			presentaMensaje(FacesMessage.SEVERITY_INFO, "ESCOJA UN MES");
-		} else if (anio.compareTo("00") == 0) {
+		} else if (anio.compareTo("0000") == 0) {
 			presentaMensaje(FacesMessage.SEVERITY_INFO, "ESCOJA UN AÑO");
 		} else {
 			listaComprobanteElectronico = comprobanteElectronicoDao
@@ -116,7 +116,8 @@ public class DocumentoElectronicoServiceImpl implements
 			presentaMensaje(FacesMessage.SEVERITY_INFO,
 					"Escoja al menos un comprobante");
 		} else {
-			quickSortEmpresas(comprobantes, 0, comprobantes.size() - 1);
+			quickSortComprobantesElectronicosPorEmpresas(comprobantes, 0,
+					comprobantes.size() - 1);
 			List<String> archivos = new ArrayList<String>();
 			String emails = null;
 			String nombreUsuario = null;
@@ -198,10 +199,10 @@ public class DocumentoElectronicoServiceImpl implements
 						crearZip(nombreZip, archivos);
 
 						if (emails.length() != 0) {
-							construirEnviarCorreo(emails, nombreZip,
-									empresa.getEmpEmail(), desencriptar(empresa
-											.getEmpClave().trim()), empresa
-											.getEmpRazonSocial().trim(),
+							construirCorreoComprobantesElectronicos(emails,
+									nombreZip, empresa.getEmpEmail(),
+									desencriptar(empresa.getEmpClave().trim()),
+									empresa.getEmpRazonSocial().trim(),
 									nombreUsuario, mes + "-" + anio);
 						}
 
@@ -215,9 +216,9 @@ public class DocumentoElectronicoServiceImpl implements
 		}
 	}
 
-	public void construirEnviarCorreo(String emails, String nombreZip,
-			String emailEmisor, String passEmail, String nombreEstablecimiento,
-			String razonSocial, String periodo) {
+	public void construirCorreoComprobantesElectronicos(String emails,
+			String nombreZip, String emailEmisor, String passEmail,
+			String nombreEstablecimiento, String razonSocial, String periodo) {
 
 		String asunto = "DOCUMENTOS EMITIDOS POR " + nombreEstablecimiento;
 
@@ -245,8 +246,8 @@ public class DocumentoElectronicoServiceImpl implements
 		}
 	}
 
-	public static void quickSortEmpresas(List<ComprobanteElectronico> A,
-			int izq, int der) {
+	public static void quickSortComprobantesElectronicosPorEmpresas(
+			List<ComprobanteElectronico> A, int izq, int der) {
 
 		String pivote = A.get(izq).getCodigoEmpresa().trim();
 		int i = izq;
@@ -284,8 +285,8 @@ public class DocumentoElectronicoServiceImpl implements
 			}
 		}
 		if (izq < j - 1)
-			quickSortEmpresas(A, izq, j - 1);
+			quickSortComprobantesElectronicosPorEmpresas(A, izq, j - 1);
 		if (j + 1 < der)
-			quickSortEmpresas(A, j + 1, der);
+			quickSortComprobantesElectronicosPorEmpresas(A, j + 1, der);
 	}
 }

@@ -20,44 +20,32 @@
 
 							<p:inputText id="txtCedulaRuc"
 								value="#{listaDocumentosElectronicosBean.cedulaRuc}"
-								placeholder="Cédula / Ruc" styleClass="Responsive TexAlCenter"
+								placeholder="Cédula / Ruc" styleClass="Container96 TexAlCenter"
 								style="float: none;" />
 
 							<p:inputText id="txtClienteProveedor" readonly="true"
 								value="#{listaDocumentosElectronicosBean.clienteProveedor}"
-								styleClass="Responsive TexAlCenter" style="float: none;" />
+								placeholder="Razón Social" styleClass="Container96 TexAlCenter"
+								style="float: none;" />
 
 							<p:selectOneMenu id="cmbMes"
 								value="#{listaDocumentosElectronicosBean.mes}"
-								panelStyleClass="Container80 TexAlCenter"
-								styleClass="TexAlCenter" style="float: none;">
-								<f:selectItem itemLabel="Mes" itemValue="00" />
-								<f:selectItem itemLabel="Enero" itemValue="01" />
-								<f:selectItem itemLabel="Febrero" itemValue="02" />
-								<f:selectItem itemLabel="Marzo" itemValue="03" />
-								<f:selectItem itemLabel="Abril" itemValue="04" />
-								<f:selectItem itemLabel="Mayo" itemValue="05" />
-								<f:selectItem itemLabel="Junio" itemValue="06" />
-								<f:selectItem itemLabel="Julio" itemValue="07" />
-								<f:selectItem itemLabel="Agosto" itemValue="08" />
-								<f:selectItem itemLabel="Septiembre" itemValue="09" />
-								<f:selectItem itemLabel="Octubre" itemValue="10" />
-								<f:selectItem itemLabel="Noviembre" itemValue="11" />
-								<f:selectItem itemLabel="Diciembre" itemValue="12" />
+								style="width:85%;float:none;">
+								<f:selectItems value="#{listaDocumentosElectronicosBean.meses}"
+									var="mes" itemValue="#{mes.id}" itemLabel="#{mes.nombre}" />
 							</p:selectOneMenu>
 
 							<p:selectOneMenu id="cmbAnio"
 								value="#{listaDocumentosElectronicosBean.anio}"
-								style="float: none;">
-								<f:selectItem itemLabel="Año" itemValue="00" />
-								<f:selectItem itemLabel="2015" itemValue="2015" />
-								<f:selectItem itemLabel="2016" itemValue="2016" />
+								style="width:85%;float:none;">
+								<f:selectItems value="#{listaDocumentosElectronicosBean.anios}"
+									var="anio" itemValue="#{anio.id}" itemLabel="#{anio.nombre}" />
 							</p:selectOneMenu>
 
 							<p:commandButton value="BUSCAR" id="btnBuscar"
 								update="txtClienteProveedor, tblDocumentosElectronicos, mensajes"
 								actionListener="#{listaDocumentosElectronicosBean.obtener}"
-								styleClass="Responsive" style="float: none;" />
+								styleClass="Container96" style="float: none;" />
 						</p:panelGrid>
 
 						<br />
