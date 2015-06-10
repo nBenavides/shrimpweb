@@ -16,6 +16,8 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import ec.com.todocompu.utilidades.Conexion;
+
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("ec.com.todocompu")
@@ -27,18 +29,20 @@ public class PersistenceConfig {
 
 	@Bean
 	public DataSource dataSource() {
-		String server = env.getProperty("jdbc.server");
-		String port = env.getProperty("jdbc.port");
-		String database = env.getProperty("jdbc.database");
-		String username = env.getProperty("jdbc.username");
-		String password = env.getProperty("jdbc.password");
+		Conexion.iniciarConeccion("postgresql", "org.postgresql.Driver",
+				env.getProperty("jdbc.server"), env.getProperty("jdbc.port"),
+				env.getProperty("jdbc.database"), env.getProperty("jdbc.user"),
+				env.getProperty("jdbc.password"));
+
+		Conexion conexion = Conexion.getConexion();
 
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql://" + server + ":" + port + "/"
-				+ database);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
+		dataSource.setDriverClassName(conexion.getDriver());
+		dataSource.setUrl("jdbc:" + conexion.getDb() + "://"
+				+ conexion.getServer() + ":" + conexion.getPort() + "/"
+				+ conexion.getDatabase());
+		dataSource.setUsername(conexion.getUser());
+		dataSource.setPassword(conexion.getPassword());
 
 		return dataSource;
 	}

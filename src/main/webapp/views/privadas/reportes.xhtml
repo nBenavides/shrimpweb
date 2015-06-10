@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<div class="ShadowBox TexAlCenter whiteback BlueBorderedBox">
+					<h1 class="BigTopic">REPORTES</h1>
+
+					<h:form id="formSiembra">
+
+						<p:growl id="mensajes" life="20000" showSummary="false"
+							showDetail="true" />
+
+						<div class="EmptyBox10" />
+
+						<p:selectOneMenu id="comboEmpresa" value="#{reporteBean.empresa}"
+							required="true" requiredMessage="Escoja una empresa"
+							style="min-width:200px; width:220px;">
+							<f:selectItem itemLabel="ESCOJA UNA EMPRESA" />
+							<f:selectItems value="#{reporteBean.empresas}" var="empresa"
+								itemValue="#{empresa.empCodigo}"
+								itemLabel="#{empresa.empRazonSocial}" />
+							<p:ajax event="change"
+								listener="#{reporteBean.cargarCentroProduccion}"
+								update="formSiembra:comboCentroProduccion" />
+						</p:selectOneMenu>
+
+						<div class="EmptyBox10" />
+
+						<p:selectOneMenu id="comboCentroProduccion"
+							value="#{reporteBean.sector}" required="true"
+							requiredMessage="Escoja un centro/producción"
+							style="min-width:200px; width:220px;">
+							<f:selectItem itemLabel="ESCOJA UN CENTRO DE PRODUCCIÓN" />
+							<f:selectItems value="#{reporteBean.sectores}" var="sector"
+								itemValue="#{sector.id.secCodigo}"
+								itemLabel="#{sector.secNombre}" />
+						</p:selectOneMenu>
+
+						<div class="EmptyBox10" />
+
+						<p:accordionPanel id="panel" multiple="false">
+
+							<p:tab title="Resumen Siembra">
+
+								<p:panelGrid columns="1" layout="grid"
+									style="border:0px !important; background:none;"
+									class="FormContent">
+
+									<p:calendar id="btnInicio" placeholder="Desde"
+										value="#{reporteBean.fechaInicio}" required="true"
+										requiredMessage="Ingrese la fecha de Inicio" />
+
+									<p:calendar id="btnFin" placeholder="Hasta"
+										value="#{reporteBean.fechaFin}" required="true"
+										requiredMessage="Ingrese la fecha de Inicio" />
+
+									<p:commandButton update=":mensaje"
+										actionListener="#{reporteBean.resumenSiembra}"
+										value="Generar Reporte" ajax="false"
+										style="min-width:200px; width:220px;" />
+
+								</p:panelGrid>
+
+							</p:tab>
+
+							<p:tab title="Proveedores">
+								<h:form>
+									<p:commandButton value="PROVEEDORES" ajax="false"
+										actionListener="#{directorioReporteBean.reporteProveedor}"
+										update=":mensaje" style="min-width:200px; width:220px;" />
+								</h:form>
+							</p:tab>
+
+						</p:accordionPanel>
+
+					</h:form>
+
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
